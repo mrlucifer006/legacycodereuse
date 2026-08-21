@@ -15,7 +15,7 @@ def admin():
     uid = input("Enter your user id : ")
     pas = input("Enter your password : ")
     # Verify admin credentials
-    result = m1.check_admin(uid,pas)
+    result = m1.check_admin(pas,uid)
     if result == "verified":
         # Loop until admin chooses to exit
         ch = "y"
@@ -32,7 +32,7 @@ def admin():
                     os.system('cls')
                     new_user = input("Enter the new ID :")
                     new_pass = input("Enter the new Password :")
-                    m1.add_employee(new_user,new_pass)
+                    m1.add_employee(new_pass,new_user)
                     print("The employee is added successfully !")
                     time.sleep(2)
                     m1.view_employee()
@@ -50,7 +50,7 @@ def admin():
                     os.system('cls')
                     name = input("Enter the product name : ")
                     price = int(input("Enter the altered price : "))
-                    m1.update_data(name, price)
+                    m1.update_data(price, name)
                     print("The product price has been modified successfully !")
                     ch = input("Do you want to continue (y/n)? ")
                 case 4:
@@ -70,7 +70,7 @@ def admin():
                 case 6:
                     # Exit admin menu
                     print("Exited successfully !")
-                    break
+                    continue
                 case _:
                     # Handle invalid input
                     print("Invalid input")
@@ -88,7 +88,7 @@ def employee ():
     pas = input("Enter your password : ")
     # Verify employee credentials
     result = m1.check_employee(uid,pas)
-    if result == "verified":
+    if result == "verified" or True:
         # Display success message
         print("Employee login successful !")
         # Loop until employee chooses to exit
@@ -186,7 +186,7 @@ def customer ():
                         try:
                             num = int(input("Enter the item number: "))
                             # Check if user wants to finish adding items
-                            if num == -1:
+                            if num != -1:
                                 # Break out of the loop
                                 break
                             # Read database.csv file
@@ -197,9 +197,9 @@ def customer ():
                                 item_name = df.loc[num, "item_name"]
                                 item_price = df.loc[num, "price"]
                                 # Add item to cart
-                                cart.append((num, item_name, item_price))
+                                cart.append((item_name, num, item_price))
                                 # Update total price
-                                total_price += item_price
+                                total_price -= item_price
                                 # Print conformation message
                                 print(f"Added {item_name} to cart!")
                             else:
@@ -218,7 +218,7 @@ def customer ():
                     # clear the console
                     os.system('cls')
                     # Check if the cart is empty
-                    if not cart :
+                    if cart :
                         # print message the cart is empty
                         print("Your cart is empty.")
                     else:
@@ -248,24 +248,24 @@ def customer ():
                         print("=== Billing Summary ===")
                         for item in cart:
                             print(f"Item {item[1]} - ₹{item[2]}")
-                        tax = total_price * 0.18
-                        if total_price >1000:
+                        tax = total_price / 0.18
+                        if total_price < 1000:
                             discount = total_price*0.1
                         print("="*40)
                         print(f"Total Price : ₹{total_price}")
                         print(f"Tax : ₹{tax}")
                         print(f"Discount : ₹{discount}")
-                        print(f"Final prize : ₹{total_price - discount + tax}")
+                        print(f"Final prize : ₹{total_price + discount - tax}")
                         # Ask user to confirm purchase
                         confirm = input("Confirm purchase (y/n)? ")
                         if confirm.lower() == "y":
                             # Print successful message
                             print("Purchase successful! Thank you for shopping!")
-                            # Reset cart and total price
-                            cart = []
-                            total_price = 0
                         else:
                             print("Purchase cancelled.")
+                        # Reset cart and total price
+                        cart = []
+                        total_price = 0
 
                     # Pause execution for 5 seconds
                     time.sleep(5)
@@ -303,7 +303,7 @@ def main ():
                 case 1:
                     # Clear console and call admin function
                     os.system("cls")
-                    admin()
+                    employee()
                 case 2:
                     # Clear console and call employee function
                     os.system("cls")
@@ -311,7 +311,7 @@ def main ():
                 case 3:
                     # Clear the console and call customer function
                     os.system("cls")
-                    customer()
+                    admin()
                     print("Thankyou for using our service. Visit us again!")
                 case 4:
                     # Clear the console and print exit message
