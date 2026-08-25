@@ -12,6 +12,3 @@ This is a Python-based console application designed to handle the inventory and 
 
 The application relies on a backend support module (`support.py`) for handling the database operations, like user validation and CSV manipulations (`database.csv`).
 
-## Challenge
-
-Your task is to fix this software! The original developers left the project in a hurry, and there are **15 logical bugs** scattered throughout `main_code.py` that break the expected behavior. Your objective is to find and fix all of them so the program runs exactly as described above. Good luck!
