@@ -1,14 +1,13 @@
 #ifndef SUPPORT_H
 #define SUPPORT_H
 
-void admin();
-void agent();
-void customer();
-void display_data();
-void add_data(const char* name, int amount);
-void update_data(const char* name, int amount);
-void del_data(const char* name);
-int check_admin(const char* uid, const char* pas);
-int check_agent(const char* uid, const char* pas);
+void admin_menu(void);
+void agent_menu(void);
+void customer_menu(void);
+void show_flights(void);
+void add_flight(const char *id, const char *destination, int price, int seats);
+void update_flight(const char *id, int price, int seats);
+void delete_flight(const char *id);
+int authenticate(const char *file_name, const char *username, const char *password);
 
 #endif
