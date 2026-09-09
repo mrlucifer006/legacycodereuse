@@ -1,4 +1,3 @@
-/*--------------------HEADER FILES--------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,11 +5,7 @@
 #include <windows.h>
 #define clr() system("cls")
 
-/*--------------------GLOBAL VARIABLES--------------------*/
-
 int wow;
-
-/*--------------------FUNCTION PROTOTYPES--------------------*/
 
 void start();
 void signup();
@@ -37,7 +32,6 @@ void rem(char un[20]);
 void update(char un[20]);
 void admin();
 
-// delay function
 void fordelay(int j)
 {
   int i, k;
@@ -45,23 +39,18 @@ void fordelay(int j)
     k = i;
 }
 
-/*--------------------USER--------------------*/
-
-// user node
 struct node
 {
   int age;
   char name[20], uname[20], pass[20], title[20], school[20], nat[20];
 
-  int score, zer, ten, twe, thi, fort, fif; //for playing record
+  int score, zer, ten, twe, thi, fort, fif;
 
-  int strk, mxstrk; //for "achievement" section
+  int strk, mxstrk;
 };
 
-// user node for current user
 struct node *ob = NULL;
 
-// user node constructor
 void cons()
 {
   ob->age = 0;
@@ -78,9 +67,6 @@ void cons()
   ob->strk = ob->mxstrk = 0;
 }
 
-/*--------------------START MENU--------------------*/
-
-// start-menu
 void start()
 {
   int op, x;
@@ -114,7 +100,6 @@ void start()
   } while (!x);
 }
 
-// admin - display registered users
 void admin()
 {
   struct node *tmp = (struct node *)malloc(sizeof(struct node));
@@ -125,9 +110,6 @@ void admin()
   start();
 }
 
-/*--------------------LOGIN-SIGNUP--------------------*/
-
-// check wheteher the username is taken or not
 int check(char u[20])
 {
   struct node *tmp = (struct node *)malloc(sizeof(struct node));
@@ -142,7 +124,6 @@ int check(char u[20])
   return 1;
 }
 
-// signup page
 void sign()
 {
   clr();
@@ -287,7 +268,6 @@ void sign()
   }
 }
 
-// signup handler
 void signup()
 {
   wow = 0;
@@ -320,7 +300,6 @@ void signup()
   start();
 }
 
-// find user through the provided username and password
 int srch(char u[], char p[])
 {
   int f = 0;
@@ -348,7 +327,6 @@ int srch(char u[], char p[])
   return f;
 }
 
-// login handler
 void login()
 {
   int x, i;
@@ -400,9 +378,6 @@ void login()
   start();
 }
 
-/*--------------------HOMEPAGE--------------------*/
-
-// update user node
 void update(char un[20])
 {
   struct node *tmp = (struct node *)malloc(sizeof(struct node));
@@ -428,7 +403,6 @@ void update(char un[20])
   fclose(fin);
 }
 
-// homepage menu
 void menu()
 {
   clr();
@@ -468,9 +442,6 @@ void menu()
   }
 }
 
-/*--------------------QUIZ--------------------*/
-
-// play quiz menu
 void play()
 {
   clr();
@@ -502,7 +473,6 @@ void play()
   }
 }
 
-// rules-display
 void rules()
 {
   clr();
@@ -517,7 +487,6 @@ void rules()
   play();
 }
 
-// achievements page
 void achieve()
 {
   clr();
@@ -581,7 +550,6 @@ void achieve()
   play();
 }
 
-// question-set handler
 void root_set()
 {
   ob->score = 0;
@@ -608,7 +576,6 @@ void root_set()
   }
 }
 
-// question-header display
 void afans()
 {
   getch();
@@ -623,7 +590,6 @@ void afans()
   printf("\n\n");
 }
 
-// when option 'a' is correct
 void ansa(char a)
 {
   printf("\n");
@@ -640,7 +606,6 @@ void ansa(char a)
     printf("wrong input"), ob->strk = 0;
 }
 
-// when option 'b' is correct
 void ansb(char a)
 {
   printf("\n");
@@ -657,7 +622,6 @@ void ansb(char a)
     printf("wrong input"), ob->strk = 0;
 }
 
-// when option 'c' is correct
 void ansc(char a)
 {
   printf("\n");
@@ -674,7 +638,6 @@ void ansc(char a)
     printf("wrong input"), ob->strk = 0;
 }
 
-// when option 'd' is correct
 void ansd(char a)
 {
   printf("\n");
@@ -691,7 +654,6 @@ void ansd(char a)
     printf("wrong input"), ob->strk = 0;
 }
 
-// give remark on quiz completion
 void remark()
 {
   printf("Remark:");
@@ -725,7 +687,6 @@ void remark()
   printf("\n");
 }
 
-// question set 1
 void set1()
 {
   char a;
@@ -769,7 +730,6 @@ void set1()
   getch();
 }
 
-// question set 2
 void set2()
 {
   char a;
@@ -813,7 +773,6 @@ void set2()
   getch();
 }
 
-// question set 3
 void set3()
 {
   char a;
@@ -857,7 +816,6 @@ void set3()
   getch();
 }
 
-// question set 4
 void set4()
 {
   char a;
@@ -901,7 +859,6 @@ void set4()
   getch();
 }
 
-// question set 5
 void set5()
 {
   char a;
@@ -945,9 +902,6 @@ void set5()
   getch();
 }
 
-/*--------------------PROFILE--------------------*/
-
-// deactivate account - remove user node 
 void rem(char un[20])
 {
   struct node *tmp = (struct node *)malloc(sizeof(struct node));
@@ -967,7 +921,6 @@ void rem(char un[20])
   rename("temp.dat", "quiz.dat");
 }
 
-// profile menu
 void profile()
 {
   clr();
@@ -1019,7 +972,6 @@ void profile()
   }
 }
 
-// playing record display
 void record()
 {
   clr();
@@ -1030,7 +982,6 @@ void record()
   printf("\nclick any key to return to PROFILE page\n");
 }
 
-// view and edit profile info
 void info()
 {
   clr();
@@ -1098,22 +1049,19 @@ void info()
   }
 }
 
-/*--------------------LEADERBOARD--------------------*/
-
 struct node1
 {
   int age;
   char name[20], uname[20], pass[20], title[20], school[20], nat[20];
 
-  int score, zer, ten, twe, thi, fort, fif; //for playing record
+  int score, zer, ten, twe, thi, fort, fif;
 
-  int strk, mxstrk; //for "achievement" section
+  int strk, mxstrk;
   struct node1 *next;
 };
 
 struct node1 *current = NULL, *head = NULL;
 
-// create linked list
 void create(struct node *p)
 {
   printf("%s\n", p->uname);
@@ -1147,7 +1095,6 @@ void create(struct node *p)
   }
 }
 
-// sort linked list
 void sortll(struct node1 *first)
 {
   struct node1 *new1 = first;
@@ -1212,7 +1159,6 @@ void sortll(struct node1 *first)
   }
 }
 
-// display leaderboard
 void display(struct node1 *first)
 {
   clr();
@@ -1229,7 +1175,6 @@ void display(struct node1 *first)
   }
 }
 
-// leaderboard handler
 void leaderb()
 {
   clr();
@@ -1246,8 +1191,6 @@ void leaderb()
   display(head);
   head = NULL;
 }
-
-/*--------------------MAIN--------------------*/
 
 int main()
 {

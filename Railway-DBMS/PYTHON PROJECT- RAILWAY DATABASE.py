@@ -1,23 +1,18 @@
-#-------------MODULES IMPORTED---------------
 
 from Tkinter import *
 import ctypes
 from PIL import Image,ImageTk
 import random
 
-
-#--------CLASS DEFINITION----------
 class Railway(object):
     def __init__(self):
         pass
 
-#----------------MAIN LOOP-------------
 def main():
     pwd.destroy()
     root=Tk()
     root.title('Indian Railways')
 
-    #------GEOMETRY OF MAIN LOOP---------
     user32=ctypes.windll.user32
     sz_x=user32.GetSystemMetrics(0)
     sz_y=user32.GetSystemMetrics(1)
@@ -29,15 +24,11 @@ def main():
     root.geometry(size)
     root.resizable(0,0)
 
-    #--------PRIMARY FRAME-----------
-
     def FRM1():
         global frm1
         frm1=Frame(root)
         frm1.pack()
 
-
-        #------FRAME ADDITION TO ROOT WINDOW-------
         frmS=Frame(root)
         frmP=Frame(root)
         frmT=Frame(root)
@@ -46,7 +37,6 @@ def main():
         tkt=Frame(root)
         frmH=Frame(root)
 
-        #-----------BUTTONS AND LABELS---------
         lb1=Label(frm1,text='\nWELCOME TO INDIAN RAILWAYS:\n\n',font=('Ariel','22'))
         lb1.pack()
         bt1=Button(frm1,text='Search Trains',height=3,width=25,command=lambda :FRMS())
@@ -60,17 +50,13 @@ def main():
         bt5=Button(frm1,text='HELP',height=3,width=25,command=lambda:FRMH())
         bt5.pack()
 
-        #-----------SECONDARY FRAMES----------
-
-        ##----------SECONDARY FRAME 1-----------
         def FRMS():
             frm1.destroy()
-            
+
             global frmS
             frmS=Frame(root)
             frmS.pack()
 
-            #----------LABEL BUTTONS AND ENTRIES----------
             back_button(frmS)
             lb1=Label(frmS,text='\nFROM STATION (name or code):')
             lb1.pack()
@@ -86,7 +72,6 @@ def main():
                        command=lambda x=en1,y=en2:searchTBS(x,y))
             bt1.pack()
 
-            #------------SEARCH FUNCTION-------------
             def searchTBS(a1,a2):
                 a1=a1.get().strip().upper()
                 a2=a2.get().strip().upper()
@@ -152,7 +137,7 @@ def main():
                                 s1=int(a[0])
                             if a2==a[1].strip("'"):
                                 s2=int(a[0])
-                
+
                         if s1-s2<0:
                             p.append([y,z])
                 if p==[]:
@@ -173,15 +158,13 @@ def main():
                         tx.insert(INSERT,txt)
                         tx.pack()
 
-        ##----------SECONDARY FRAME 2-----------
         def FRMP():
             frm1.destroy()
-            
+
             global frmP
             frmP=Frame(root)
             frmP.pack()
 
-            #----------LABEL BUTTONS AND ENTRIES----------
             back_button(frmP)
             lb1=Label(frmP,text='\n10-DIGIT PNR NUMBER:')
             lb1.pack()
@@ -190,7 +173,6 @@ def main():
             bt1=Button(frmP,text='Find Details',command=lambda x=en1:check(x))
             bt1.pack()
 
-            #------------FIND DETAILS USING PNR---------------
             def check(a):
                 a=a.get().strip()
                 if a<>'':
@@ -224,7 +206,6 @@ def main():
                     else:
                         i=fin.readline()
 
-
                 txt='\nHERE ARE THE DETAILS OF BOOKINGS\n'
                 txt=txt+'\nPNR NO: '+h[0]
                 txt=txt+'\nPASSENGER\'S NAME: '+h[1]
@@ -242,17 +223,13 @@ def main():
                 t=Text(frmP)
                 t.insert(INSERT,txt)
                 t.pack()
-                
-                
 
-        ##----------SECONDARY FRAME 3-----------
         def FRMT():
             frm1.destroy()
             global frmT
             frmT=Frame(root)
             frmT.pack()
 
-            #----------LABEL BUTTONS AND ENTRIES----------
             back_button(frmT)
             lb1=Label(frmT,text='\nTRAIN NUMBER:')
             lb1.pack()
@@ -266,9 +243,7 @@ def main():
             lb3.pack()
             bt1=Button(frmT,text='Get Schedule',command=lambda x=en1,y=en2:getsch(x,y))
             bt1.pack()
-            
 
-            #--------GET SCHEDULE FUNCTION-----------
             def getsch(a1,a2):
                 a1=a1.get().strip().upper()
                 a2=a2.get().strip().upper()
@@ -286,14 +261,14 @@ def main():
                             fout=open(path,'r')
                             m=fout.readlines()
                             for c in range(len(m)):
-                
+
                                 if m[c]=='STATIONS\n':
                                     begin=c+1
                                 elif m[c]=='SEATS\n':
                                     end=c
                             rslt=m[begin:end]
                             fout.seek(0)
-                            
+
                             txt='\nINFORMATION:\n\n'
                             a=fout.readline().strip('\n')
                             txt=txt+'TRAIN NO: '+a+'\n'
@@ -316,7 +291,6 @@ def main():
                             tx=Text(frmT)
                             tx.insert(INSERT,txt)
 
-                            
                             for q in rslt:
                                 l=q.strip('\n()').split(',')
                                 a=l[0]
@@ -333,9 +307,9 @@ def main():
                                 txt=txt+f
                                 tx.insert(INSERT,txt)
                                 tx.pack()
-                                
+
                             return
-                        
+
                         else:
                             i=fin.readline()
                     else:
@@ -351,19 +325,16 @@ def main():
                     lb=Label(frmT,text=txt)
                     lb.pack()
 
-        ##----------SECONDARY FRAME 4-----------
         def FRMG():
             frm1.destroy()
-            
+
             global frmG
             frmG=Frame(root)
             frmG.pack()
             global fm
             fm=Frame(root)
             fm.pack()
-            
 
-            #----------LABEL BUTTONS AND ENTRIES----------
             back_button(frmG,fm)
             lb1=Label(frmG,text='\nTRAIN NUMBER:')
             lb1.pack()
@@ -391,9 +362,6 @@ def main():
                        y=en2,z=en3,x1=en4,y1=en5:avail(x,y,z,x1,y1))
             bt1.pack()
 
-            
-
-            #--------TRAIN AVAILABILITY FUNCTION-----------
             def avail(a1,a2,a3,a4,a5):
                 a1=a1.get().strip().upper()
                 a2=a2.get().strip().upper()
@@ -401,7 +369,7 @@ def main():
                 a4=a4.get().strip()
                 a5=a5.get().strip()
                 l=checkavail(a1,a2,a3,a4,a5)
-                
+
                 if l:
                     fwd=0
                     for i in l[0]:
@@ -439,13 +407,11 @@ def main():
                     FRMG()
                     lb=Label(fm,text='\nINVALID ENTRY!!!\nENTER CORRECT DATA')
                     lb.pack()
-                    
-                    
 
             def checkavail(a1,a2,a3,a4,a5):
                 fin=open(r'C:\Python27\TRAIN CODE\TRAIN CODE.txt','r')
                 abc=fin.read()
-                
+
                 if (a1 in abc or a2 in abc) and a3<>'' and a4<>'' and a5<>'' and (a1<>'' or a2<>''):
                     fin.seek(0)
                     i=fin.readline()
@@ -479,7 +445,7 @@ def main():
                                 gs4=int((seats[3]).strip('\n()').split(',')[1])
                                 return [[gs1,gs2,gs3,gs4],[0,0,0,0]]
                             else:
-                    
+
                                 ast=str(ast)
                                 ast=ast.strip('\n()')
                                 ast=ast.split(',')
@@ -497,21 +463,19 @@ def main():
 
                     else:
                         return []
-            
+
                 else:
                     return []
 
-            #-----------TICKET BOOKING FRAME---------
             def TKT(a1,a2,a3,a4,a5,a6):
                 frmG.destroy()
                 fm.destroy()
                 frm1.destroy()
                 global tkt
                 tkt=Frame(root)
-                
+
                 tkt.pack()
 
-                #----------LABEL BUTTONS AND ENTRIES----------
                 b0=Button(tkt,text='BACK',height=1,width=7,command=lambda:rest())
                 b0.pack()
                 def rest():
@@ -550,9 +514,8 @@ def main():
                            book(x,y,z,x1,x2,x3,x4,x5,s,t,u,v,w))
                 bt1.pack()
 
-                #--------TICKET BOOKING FUNCTION----------
                 def book(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13):
-                    
+
                     a1=a1.get().strip().upper()
                     a2=a2.get().strip()
                     a3=a3.get().strip()
@@ -586,13 +549,13 @@ def main():
                             else:
                                 p[i]=0
                         print ind
-            
+
                         if x[0][ind]>=p[ind]:
                             import random
                             x[0][ind]=x[0][ind]-p[ind]
                             x[1][ind]=x[1][ind]+p[ind]
                             dic=dict(zip(clas,x[1]))
-        
+
                             while True:
                                 pnr=random.randint(1000000000,9999999999)
                                 f=open(r'C:\Python27\PNRS\PNRS.txt','r')
@@ -613,7 +576,7 @@ def main():
                             i=fin.readline()
                             ctr=0
                             while i:
-            
+
                                 if dt in i:
                                     tct='('+"'"+dt+"',1A/"+str(dic['1A'])+",2A/"+str(dic['2A'])
                                     tct=tct+",3A/"+str(dic['3A'])+',SL/'+str(dic['SL'])+')\n'
@@ -635,18 +598,18 @@ def main():
                             txt=txt+'PASSENGER\'S NAME: '+a1
                             txt=txt+'\nPNR NO: '+str(pnr)
                             txt=txt+'\n\nFOR DETAILS CHECK PNR ENQUIRY\n\nHAVE A SAFE JOURNEY :)'
-                            
+
                             t=Text(tkt)
                             t.insert(INSERT,txt)
                             t.pack()
                             return
-        
+
                         else:
                             txt= '\nREQUIRED SEATS NOT AVAILABLE'
                             lb=Label(tkt,text=txt)
                             lb.pack()
                             return
-                        
+
                 def conv2(a1,a2):
                     fin=open(r'C:\Python27\TRAIN CODE\TRAIN CODE.txt','r')
                     abc=fin.read()
@@ -713,7 +676,7 @@ def main():
                                     s1=int(a[0])
                                 if a2==a[1].strip("'"):
                                     s2=int(a[0])
-                
+
                             if s1-s2<0:
                                 p.append([y,z])
                     if p==[]:
@@ -721,15 +684,12 @@ def main():
                     else:
                         return 1
 
-                
-        ##----------SECONDARY FRAME 5-----------
         def FRMH():
             frm1.destroy()
             global frmH
             frmH=Frame(root)
             frmH.pack()
 
-            #----------LABEL BUTTONS AND ENTRIES----------
             back_button(frmH)
             lb=Label(frmH,text='\n\n\n\n\n')
             lb.pack()
@@ -738,7 +698,6 @@ def main():
             bt2=Button(frmH,text='Get Station Codes',height=3,width=25,command=lambda:stcode())
             bt2.pack()
 
-            #----------TRAIN CODE FUNCTION------------
             def trcode():
                 fin=open(r'C:\Python27\TRAIN CODE\TRAIN CODE.txt','r')
                 i=fin.readline()
@@ -753,7 +712,6 @@ def main():
                 t.insert(INSERT,txt)
                 t.pack()
 
-            #----------STATION CODE FUNCTION------------
             def stcode():
                 fin=open(r'C:\Python27\STATION CODE\STATION CODE.txt','r')
                 i=fin.readline()
@@ -767,10 +725,7 @@ def main():
                 t=Text(frmH)
                 t.insert(INSERT,txt)
                 t.pack()
-                    
 
-    #------BACK BUTTON-------------
-            
     def back_button(master,slave=None):
 
         def back():
@@ -778,11 +733,10 @@ def main():
             if slave:
                 slave.destroy()
             FRM1()
-            
+
         btn=Button(master,text='BACK',height=1,width=7,command=lambda:back())
         btn.pack()
 
-    #------TO CONVERT STATION CODE TO STATION NAME--------
     def conv(a1):
         fin=open(r'C:\Python27\STATION CODE\STATION CODE.txt','r')
         fin.seek(0)
@@ -796,7 +750,6 @@ def main():
             else:
                 i=fin.readline()
 
-    #-------TO CONVERT TRAIN CODE TO TRAIN NAME----------
     def conv1(a1):
         fin=open(r'C:\Python27\TRAIN CODE\TRAIN CODE.txt','r')
         fin.seek(0)
@@ -809,12 +762,9 @@ def main():
                 return a1
             else:
                 i=fin.readline()
-        
+
     FRM1()
     root.mainloop()
-
-
-#---------WELCOME SCREEN CODE-----------
 
 w1=Tk()
 w1.overrideredirect(1)
@@ -833,12 +783,10 @@ l1.pack()
 w1.after(5000, lambda:w1.destroy())
 w1.mainloop()
 
-#--------PASSWORD FRAME------------------
 pwd=Tk()
 pwd.title('Log IN')
 pw=Frame(pwd)
 
-#--------GEOMETRY OF PASSWORD FRAME---------
 user32=ctypes.windll.user32
 sz_x=user32.GetSystemMetrics(0)
 sz_y=user32.GetSystemMetrics(1)
@@ -848,7 +796,6 @@ ad_x=int((sz_x-pwd_x)/2)
 ad_y=int((sz_y-pwd_y)/2)
 size=str(pwd_x)+'x'+str(pwd_y)+'+'+str(ad_x)+'+'+str(ad_y)
 pwd.geometry(size)
-
 
 def pw_frame():
     global pw
@@ -884,13 +831,6 @@ def check(a1,a2):
         lbl=Label(pw,text=txt)
         lbl.pack()
 
-
-
-
-#-------MAIN-------
 pw_frame()
 pwd.mainloop()
-
-
-
 

@@ -235,9 +235,9 @@ void customer() {
                 printf("Enter flight number to book (enter index from list): ");
                 int num;
                 scanf("%d", &num);
-                // Simplify booking by just adding a fixed price or prompting if found
+
                 printf("Flight booked tentatively!\n");
-                total_price += 100; // Simulated price
+                total_price += 100;
                 break;
             case 3:
                 printf("Total Price: $%d\n", total_price);

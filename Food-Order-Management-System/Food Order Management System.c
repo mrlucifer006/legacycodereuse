@@ -143,7 +143,7 @@ void main()
     insertend(&d, 3.5, "Strawberry Mouse", 1, 100);
     insertend(&d, 3.6, "Orea Freakshake", 1, 150);
     insertend(&d, 3.7, "Fruit Milkshake", 1, 80);
-    //login
+
     char uid[20], pwd[20], uid1[20], pwd1[20], c=' ', k=' ';
     int i=0, ch;
     while(1)
@@ -153,7 +153,7 @@ mainscr: printf("\n\nEnter Choice: 1. Login 2.New User 3.Exit\n");
         scanf("%d", &ch);
         if(ch==3)
             break;
-    //register new user
+
         if(ch==2)
         {
             printf(" \n\n                  ENTER USERNAME:-");
@@ -187,7 +187,7 @@ mainscr: printf("\n\nEnter Choice: 1. Login 2.New User 3.Exit\n");
                 i++;
             }
             pwd[i]='\0';
-            //USERMENU
+
             if(strcmp(uid,uid1)==0&&strcmp(pwd,pwd1)==0)
             {
                 printf("\n\n            LOGIN SUCCESFULL!");
@@ -270,7 +270,7 @@ mainscr: printf("\n\nEnter Choice: 1. Login 2.New User 3.Exit\n");
                         foodlist1(&o);
                         goto afterorder;
                     }
-                    //billing
+
                     else if(ch==3)
                     {
                         cls();
@@ -295,7 +295,7 @@ mainscr: printf("\n\nEnter Choice: 1. Login 2.New User 3.Exit\n");
                 else
                     printf("\nInvalid Choice.\n");
             }
-            //admin
+
             else if(strcmp(uid,"admin")==0&&strcmp(pwd,"admin123")==0)
             {
                 printf("\n\n            WELCOME ADMIN");
@@ -328,7 +328,7 @@ mainscr: printf("\n\nEnter Choice: 1. Login 2.New User 3.Exit\n");
                         {
                         }
                         break;
-                    case 3: //Sleep(3000);
+                    case 3:
                         cls();
                         printf("Recent Order:\n");
                         foodlist1(&o);
