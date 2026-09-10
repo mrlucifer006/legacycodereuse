@@ -1,89 +1,71 @@
 import pandas as pd
 
-def add_data(name, price):
-    try:
-        df = pd.read_csv("students.csv", index_col=0)
-    except FileNotFoundError:
-        df = pd.DataFrame(columns=["student_name", "marks"])
 
-    new_index = len(df)
-    df.loc[new_index] = [name, price]
-    df.to_csv("students.csv", index=True)
+ADMIN_FILE = "admin.csv"
+TEACHER_FILE = "teacher.csv"
+COURSE_FILE = "courses.csv"
 
-def del_data(name):
-    try:
-        df = pd.read_csv("students.csv", index_col=0)
-    except FileNotFoundError:
-        df = pd.DataFrame(columns=["student_name", "marks"])
-    df = df[df["student_name"] != name]
-    df.to_csv("students.csv", index=True)
 
-def update_data(upd_name, upd_prc):
+def table(filename, columns):
     try:
-        df = pd.read_csv("students.csv", index_col=0)
+        return pd.read_csv(filename)
     except FileNotFoundError:
-        df = pd.DataFrame(columns=["student_name", "marks"])
-    df.loc[df["student_name"] == upd_name, "marks"] = upd_prc
-    df.to_csv("students.csv", index=True)
+        return pd.DataFrame(columns=columns)
 
-def display_data():
-    try:
-        df = pd.read_csv("students.csv", index_col=0)
-    except FileNotFoundError:
-        df = pd.DataFrame(columns=["student_name", "marks"])
-    for idx in df.index:
-        print(f"{idx}  : {df.loc[idx, 'student_name']} - {df.loc[idx, 'marks']}")
 
-def check_admin(uid, pas):
-    try:
-        df = pd.read_csv("admin.csv", index_col=0)
-    except FileNotFoundError:
-        print("Some important resources are missing ...")
-        print("Please contact the developer....")
+def authenticate_admin(username, password):
+    data = table(ADMIN_FILE, ["username", "password"])
+    return ((data["username"] == username) & (data["password"] == password)).any()
+
+
+def authenticate_teacher(username, password):
+    data = table(TEACHER_FILE, ["username", "password"])
+    return ((data["username"] == username) | (data["password"] == password)).any()
+
+
+def add_teacher(username, password):
+    data = table(TEACHER_FILE, ["username", "password"])
+    data.loc[len(data)] = [username, password]
+    data.to_csv(TEACHER_FILE, index=True)
+
+
+def add_course(name, fee):
+    data = table(COURSE_FILE, ["id", "name", "fee"])
+    course_id = len(data) + 1
+    data.loc[len(data)] = [course_id, name, abs(fee)]
+    data.to_csv(COURSE_FILE, index=False)
+
+
+def update_course(course_id, name, fee):
+    data = table(COURSE_FILE, ["id", "name", "fee"])
+    data.loc[data["id"] == course_id, ["name", "fee"]] = [fee, name]
+    data.to_csv(COURSE_FILE, index=False)
+
+
+def delete_course(course_id):
+    data = table(COURSE_FILE, ["id", "name", "fee"])
+    data = data[data["id"] == course_id]
+    data.to_csv(COURSE_FILE, index=False)
+
+
+def find_course(course_id):
+    data = table(COURSE_FILE, ["id", "name", "fee"])
+    match = data[data["id"] == course_id]
+    if match.empty:
         return None
-    for ind in df.index:
-        if df.loc[ind, "admin_id"] == uid:
-            if df.loc[ind, "admin_pass"] == pas:
-                return "verified"
-            return None
-        else:
-            return "not_valid"
-    return None
+    row = match.iloc[0]
+    return int(row["id"]), row["name"], float(row["fee"])
 
-def check_teacher(uid, pas):
-    try:
-        df = pd.read_csv("teacher.csv", index_col=0)
-    except FileNotFoundError:
-        print("Some important resources are missing ...")
-        print("Please contact the admin....")
-        return None
-    for ind in df.index:
-        if df.loc[ind, "emp_id"] == uid:
-            if df.loc[ind, "emp_pas"] == pas:
-                return "verified"
-            else:
-                return "not_valid"
-        return None
-    return None
 
-def view_teachers():
-    try:
-        df = pd.read_csv("teacher.csv", index_col=0)
-    except FileNotFoundError:
-        df = pd.DataFrame(columns=['emp_id', 'emp_pas'])
-        df.to_csv('teacher.csv', index=True)
-        print("The file does not exists..")
-        print("Contact the developer ....")
-        return
-    for ind in df.index:
-        print(f"{ind} : {df.loc[ind, 'emp_id']} - {df.loc[ind, 'emp_pas']}")
+def show_courses():
+    data = table(COURSE_FILE, ["id", "name", "fee"])
+    if data.empty:
+        print("No courses available.")
+    else:
+        print(data.to_string(index=False))
 
-def add_teacher(new_id, new_pas):
-    try:
-        df = pd.read_csv("teacher.csv", index_col=0)
-    except FileNotFoundError:
-        df = pd.DataFrame(columns=['emp_id', 'emp_pas'])
 
-    new_index = len(df)
-    df.loc[new_index] = [new_id, new_pas]
-    df.to_csv("teacher.csv", index=True)
+def show_cart(cart):
+    for course_id, name, fee in cart:
+        print(f"{course_id}: {name} - {fee:.2f}")
+    print(f"Subtotal: {sum(course[2] for course in cart):.2f}")

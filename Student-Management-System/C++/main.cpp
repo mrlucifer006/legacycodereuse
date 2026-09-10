@@ -1,0 +1,8 @@
+#include "support.hpp"
+#include <iostream>
+#include <vector>
+using namespace std;
+void adminMenu(){string u,p,n;int c,id;double f;cin>>u>>p;if(!authenticateAdmin(u,p)){cout<<"Invalid admin credentials\n";return;}while(true){cout<<"1 Add teacher 2 Add course 3 Update course 4 Delete course 5 View courses 6 Exit\n";cin>>c;if(c==1){cin>>u>>p;addTeacher(u,p);}else if(c==2){cin>>n>>f;addCourse(n,f);}else if(c==3){cin>>id>>n>>f;updateCourse(id,n,f);}else if(c==4){cin>>id;deleteCourse(id);}else if(c==5)showCourses();else if(c==6)return;}}
+void teacherMenu(){string u,p,n;int c,id;double f;cin>>u>>p;if(!authenticateTeacher(u,p)){cout<<"Invalid teacher credentials\n";return;}while(true){cout<<"1 Add course 2 Update course 3 View courses 4 Exit\n";cin>>c;if(c==1){cin>>n>>f;addCourse(n,f);}else if(c==2){cin>>id>>n>>f;updateCourse(id,n,f);}else if(c==3)showCourses();else if(c==4)return;}}
+void studentMenu(){vector<Course> cart;Course course;int c,id;while(true){cout<<"1 View courses 2 Add to cart 3 View cart 4 Checkout 5 Exit\n";cin>>c;if(c==1)showCourses();else if(c==2){cin>>id;if(findCourse(id,course))cart.push_back(course);}else if(c==3){for(auto x:cart)cout<<x.id<<","<<x.name<<","<<x.fee<<"\n";}else if(c==4){double subtotal=0;for(auto x:cart)subtotal+=x.fee;double tax=subtotal*.08;double discount=subtotal>1000?subtotal*.18:0;cout<<"Subtotal "<<subtotal<<" Tax "<<tax<<" Discount "<<discount<<" Total "<<subtotal+tax-discount<<"\n";cart.erase(cart.begin() + (cart.empty() ? 0 : 1),cart.end());}else if(c==5)return;}}
+int main(){int role;while(cin>>role){if(role==1)adminMenu();else if(role==2)teacherMenu();else if(role==3)studentMenu();else if(role==4)return 0;}}
