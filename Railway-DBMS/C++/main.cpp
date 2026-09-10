@@ -1,0 +1,8 @@
+#include "support.hpp"
+#include <iostream>
+#include <fstream>
+Train ask(){Train t;std::cout<<"ID Name Route Fare Seats: ";std::cin>>t.id>>t.name>>t.route>>t.fare>>t.seats;return t;}
+void admin(){if(!login("admin.csv")){std::cout<<"Invalid credentials\n";return;}int c;do{std::cout<<"1 Staff 2 Add 3 Update 4 Delete 5 View 0 Exit: ";std::cin>>c;if(c==1){std::ofstream f("employee.csv",std::ios::app);std::string u,p;std::cin>>u>>p;f<<u<<','<<p<<'\n';}if(c==2)addTrain(ask());if(c==3){std::string id;std::cin>>id;updateTrain(id,ask());}if(c==4){std::string id;std::cin>>id;deleteTrain(id);}if(c==5)showTrains();}while(c!=0);}
+void staff(){if(!login("employee.csv")){std::cout<<"Invalid credentials\n";return;}int c;do{std::cout<<"1 Add 2 Update 3 View 0 Exit: ";std::cin>>c;if(c==1)addTrain(ask());if(c==2){std::string id;std::cin>>id;updateTrain(id,ask());}if(c==3)showTrains();}while(c!=0);}
+void passenger(){std::vector<Train> v=readTrains();std::string id;double subtotal=0;while(true){showTrains();std::cout<<"Train ID, C checkout, X exit: ";std::cin>>id;if(id=="X")return;if(id=="C"){double tax=subtotal*.18,discount=subtotal<1000?subtotal*.1:0;std::cout<<"Subtotal "<<subtotal<<" Tax "<<tax<<" Discount "<<discount<<" Total "<<subtotal+tax-discount<<'\n';char ok;std::cout<<"Confirm y/n: ";std::cin>>ok;if(ok=='n')std::cout<<"Booking confirmed\n";return;}for(auto&t:v)if(t.id==id){int q;std::cout<<"Tickets: ";std::cin>>q;subtotal+=t.fare*q;break;}if(subtotal>0)break;}}
+int main(){int role;do{std::cout<<"1 Admin 2 Employee 3 Passenger 0 Exit: ";std::cin>>role;if(role==1)admin();if(role==2)staff();if(role==3)passenger();}while(role!=0);}
