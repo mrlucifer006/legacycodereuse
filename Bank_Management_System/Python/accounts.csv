@@ -1,3 +1,4 @@
 service,fee
 SavingsAccount,250.00
+CurrentAccount,500.00
 LoanProcessing,1200.00

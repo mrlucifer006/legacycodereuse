@@ -1,0 +1,2 @@
+import java.util.Scanner;
+public class Main { public static void main(String[] args) { Scanner input = new Scanner(System.in); int choice; do { System.out.print("\nBank Service Billing System\n1. Admin\n2. Teller\n3. Customer\n4. Exit\nChoose: "); choice=input.nextInt(); if(choice==1) Support.admin(input); else if(choice==2) Support.teller(input); else if(choice==3) Support.customer(input); } while(choice!=4); } }
