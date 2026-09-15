@@ -1,0 +1,4 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) throws Exception { Scanner sc=new Scanner(System.in); int c; do { System.out.print("Room orders: 1 admin 2 receptionist 3 customer 0 exit: "); c=sc.nextInt(); if(c==1){if(!Support.login("admin.csv",sc)){System.out.println("Access denied");continue;}do{System.out.print("Admin: 1 staff 2 add 3 update 4 delete 5 view 0 exit: ");c=sc.nextInt();if(c==1)Support.addStaff(sc);if(c==2)Support.addRoom(sc);if(c==3)Support.updateRoom(sc);if(c==4)Support.deleteRoom(sc);if(c==5)Support.viewRoom();}while(c!=0);}if(c==2){if(!Support.login("receptionist.csv",sc)){System.out.println("Access denied");continue;}do{System.out.print("Staff: 1 add 2 update 3 view 0 exit: ");c=sc.nextInt();if(c==1)Support.addRoom(sc);if(c==2)Support.updateRoom(sc);if(c==3)Support.viewRoom();}while(c!=0);}if(c==3)Support.customerOrder(sc);}while(c!=0); }
+}

@@ -1,3 +1,3 @@
-# Feature expansion: transaction timestamp
+# Beginner feature: High-Score Leaderboard
 
-After a confirmed player checkout, generate a timestamp in `YYYY-MM-DD HH:MM:SS` format. Display it in the summary and append the selected pack ids, final total, and timestamp to `transactions.csv`. Use the C time library and create the file with a header when it is first needed.
+After a user completes a quiz, save their score and username to a `leaderboard.csv` file. Add a menu option that reads this file and displays the top 5 highest scores.

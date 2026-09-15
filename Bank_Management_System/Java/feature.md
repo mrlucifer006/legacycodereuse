@@ -1,3 +1,3 @@
-# Feature expansion
+# Beginner feature: Account Transfer
 
-Add a transaction-history feature. On successful checkout, create or append to `transactions.csv` with the selected banking services, subtotal, 18 percent tax, discount, total, and an ISO timestamp formatted as `YYYY-MM-DD HH:MM:SS`. Use `BufferedWriter`; the first run should write a CSV header.
+Allow a logged-in user to transfer funds to another account. The system will ask for the recipient's username and amount, securely update both balances, and write the changes back to the CSV.

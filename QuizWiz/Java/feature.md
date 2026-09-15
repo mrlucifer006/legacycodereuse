@@ -1,3 +1,3 @@
-# Feature expansion: transaction timestamp
+# Beginner feature: High-Score Leaderboard
 
-After a player confirms checkout, make a timestamp using `YYYY-MM-DD HH:MM:SS`. Display it in the final summary and append the timestamp, selected pack ids, and final total to `transactions.csv`. Use Java's date and time classes, then use `BufferedWriter` to add a new transaction row.
+After a user completes a quiz, save their score and username to a `leaderboard.csv` file. Add a menu option that reads this file and displays the top 5 highest scores.

@@ -1,3 +1,3 @@
-# Beginner feature: order timestamp
+# Beginner feature: Dietary Filtering
 
-After the user confirms an order, use `java.time.LocalDateTime.now()` and `DateTimeFormatter` to create a `YYYY-MM-DD HH:MM:SS` timestamp. Display it beside the receipt total. Next, append the timestamp and total to a new `orders.csv` using `BufferedWriter`.
+Add a 'dietary category' column (e.g., Veg, Non-Veg, Vegan) to the menu CSV. Allow the customer to filter the displayed menu based on their dietary preference before building their order.

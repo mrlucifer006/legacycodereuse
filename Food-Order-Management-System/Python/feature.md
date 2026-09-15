@@ -1,3 +1,3 @@
-# Beginner feature: order timestamp
+# Beginner feature: Dietary Filtering
 
-Add a `YYYY-MM-DD HH:MM:SS` timestamp when a customer confirms an order. Start by importing Python's `datetime` module. After confirmation succeeds, format the current time, then print it with the final total. As a next step, append the order number, total, and timestamp to a new `orders.csv` file.
+Add a 'dietary category' column (e.g., Veg, Non-Veg, Vegan) to the menu CSV. Allow the customer to filter the displayed menu based on their dietary preference before building their order.

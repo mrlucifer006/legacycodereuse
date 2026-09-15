@@ -1,2 +1,4 @@
-emp_id,salary
-1,5000
+id,name,price,stock
+1,Burger,180,20
+2,Pizza,450,15
+3,Pasta,250,25

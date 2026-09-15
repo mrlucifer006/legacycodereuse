@@ -1,5 +1,3 @@
-# Feature expansion: transaction timestamp
+# Beginner feature: GPA Calculator
 
-After a student explicitly confirms checkout, append a row to `enrollments.csv`. Use a local timestamp formatted as `YYYY-MM-DD HH:MM:SS`, the selected course IDs, subtotal, 18% tax, discount, and final amount. Add a file-writing helper in `Support.java` and invoke it from the confirmed checkout branch in `Main.java`.
-
-Verify confirmed, declined, and empty-cart checkouts.
+Expand the student record to include multiple course grades. Create a function that calculates and displays the student's final GPA average across all their enrolled courses.

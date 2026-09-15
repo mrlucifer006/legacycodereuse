@@ -1,0 +1,3 @@
+#include <iostream>
+#include "support.hpp"
+int main(){int c; do{std::cout<<"Room orders: 1 admin 2 receptionist 3 customer 0 exit: ";std::cin>>c;if(c==1){if(!login("admin.csv")){std::cout<<"Access denied\n";continue;}do{std::cout<<"Admin: 1 staff 2 add 3 update 4 delete 5 view 0 exit: ";std::cin>>c;if(c==1)addStaff();if(c==2)addRoom();if(c==3)updateRoom();if(c==4)deleteRoom();if(c==5)viewRoom();}while(c);}if(c==2){if(!login("receptionist.csv")){std::cout<<"Access denied\n";continue;}do{std::cout<<"Staff: 1 add 2 update 3 view 0 exit: ";std::cin>>c;if(c==1)addRoom();if(c==2)updateRoom();if(c==3)viewRoom();}while(c);}if(c==3)customerOrder();}while(c);}

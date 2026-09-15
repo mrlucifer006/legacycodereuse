@@ -1,3 +1,3 @@
-# Beginner feature: order timestamp
+# Beginner feature: Dietary Filtering
 
-After a confirmed order, create a timestamp with `time`, `localtime`, and `strftime` using the format `YYYY-MM-DD HH:MM:SS`. Print it in the receipt first. Then append the timestamp and total to `orders.csv`, taking care to write the CSV header only when the file is new.
+Add a 'dietary category' column (e.g., Veg, Non-Veg, Vegan) to the menu CSV. Allow the customer to filter the displayed menu based on their dietary preference before building their order.

@@ -1,3 +1,3 @@
-# Beginner feature: order timestamp
+# Beginner feature: Dietary Filtering
 
-Use `std::chrono` to get the current time and `std::put_time` to format it as `YYYY-MM-DD HH:MM:SS` after a successful confirmation. Once it prints correctly, use `std::ofstream` in append mode to store the timestamp and order total in `orders.csv`.
+Add a 'dietary category' column (e.g., Veg, Non-Veg, Vegan) to the menu CSV. Allow the customer to filter the displayed menu based on their dietary preference before building their order.
